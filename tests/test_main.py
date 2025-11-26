@@ -1,5 +1,5 @@
 import unittest
-from main import add, subtract
+from src.main import add, subtract
 
 
 class TestMathFunctions(unittest.TestCase):
