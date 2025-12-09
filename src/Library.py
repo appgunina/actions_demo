@@ -24,7 +24,10 @@ class Book:
         self.__available = True
 
     def __str__(self):
-        return f"'{self.__title}' ({self.__author}, {self.__year}), доступна: {self.__available}"
+        return (
+            f"'{self.__title}' ({self.__author}, {self.__year}), "
+            f"доступна: {self.__available}"
+        )
 
 
 class PrintedBook(Book):
@@ -41,12 +44,16 @@ class PrintedBook(Book):
 
     def __str__(self):
         base_str = super().__str__()
-        return f"{base_str}, страницы: {self.pages}, состояние: {self.condition}"
+        return (
+            f"{base_str}, страницы: {self.pages}, "
+            f"состояние: {self.condition}"
+        )
 
 
+# заменила format на form, тк в python есть такая встроенная функция
 class EBook(Book):
     def __init__(self, title, author, year, file_size,
-                 form):  # заменила format на form, тк в python есть такая встроенная функция
+                 form):
         super().__init__(title, author, year)
         self.file_size = file_size
         self.form = form
@@ -76,10 +83,15 @@ class User:
         if book in self.__borrowed_books:
             book.mark_as_returned()
             self.__borrowed_books.remove(book)
-            print(f"Пользователь {self.name} вернул книгу '{book.get_title()}'")
+            print(
+                f"Пользователь {self.name} вернул книгу "
+                f"'{book.get_title()}'"
+            )
         else:
-            print(f"Пользователь {self.name} не брал книгу '{book.get_title()}'")
-
+            print(
+                f"Пользователь {self.name} не брал книгу "
+                f"'{book.get_title()}'"
+            )
     def show_books(self):
         if self.__borrowed_books:
             print(f"Книги, взятые пользователем {self.name}:")
@@ -103,7 +115,10 @@ class Librarian(User):
 
     def register_user(self, library, user):
         library.add_user(user)
-        print(f"Библиотекарь {self.name} зарегистрировал пользователя {user.name}")
+        print(
+            f"Библиотекарь {self.name} зарегистрировал пользователя "
+            f"{user.name}"
+        )
 
 
 class Library:
@@ -151,7 +166,8 @@ class Library:
     def _find_user_by_name(self, user_name):
         return next((u for u in self.__users if u.name == user_name), None)
 
-    # Проверяет наличие книги и пользователя, возвращает их или None при ошибке + выводит соответствующие сообщения об ошибках.
+    # Проверяет наличие книги и пользователя, возвращает их или None при ошибке 
+    # + выводит соответствующие сообщения об ошибках.
     def _validate_book_and_user(self, title, user_name):  #
         book = self.find_book(title)
         if not book:
@@ -183,7 +199,11 @@ if __name__ == "__main__":
     # --- создаём книги ---
     b1 = PrintedBook("Война и мир", "Толстой", 1869, 1225, "хорошая")
     b2 = EBook("Мастер и Маргарита", "Булгаков", 1966, 5, "epub")
-    b3 = PrintedBook("Преступление и наказание", "Достоевский", 1866, 480, "плохая")
+    b3 = PrintedBook("Преступление и наказание",
+                     "Достоевский",
+                     1866,
+                     480,
+                     "плохая")
 
     # --- создаём пользователей ---
     user1 = User("Анна")
@@ -212,3 +232,4 @@ if __name__ == "__main__":
     # --- ремонт книги ---
     b3.repair()
     print(b3)
+    
