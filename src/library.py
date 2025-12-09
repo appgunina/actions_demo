@@ -92,6 +92,7 @@ class User:
                 f"Пользователь {self.name} не брал книгу "
                 f"'{book.get_title()}'"
             )
+            
     def show_books(self):
         if self.__borrowed_books:
             print(f"Книги, взятые пользователем {self.name}:")
@@ -166,7 +167,7 @@ class Library:
     def _find_user_by_name(self, user_name):
         return next((u for u in self.__users if u.name == user_name), None)
 
-    # Проверяет наличие книги и пользователя, возвращает их или None при ошибке 
+    # Проверяет наличие книги и пользователя, возвращает их или None при ошибке
     # + выводит соответствующие сообщения об ошибках.
     def _validate_book_and_user(self, title, user_name):  #
         book = self.find_book(title)
@@ -232,4 +233,3 @@ if __name__ == "__main__":
     # --- ремонт книги ---
     b3.repair()
     print(b3)
-    
