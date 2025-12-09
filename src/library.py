@@ -92,7 +92,7 @@ class User:
                 f"Пользователь {self.name} не брал книгу "
                 f"'{book.get_title()}'"
             )
-            
+    
     def show_books(self):
         if self.__borrowed_books:
             print(f"Книги, взятые пользователем {self.name}:")
